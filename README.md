@@ -58,9 +58,6 @@ Or install it yourself as:
 
     $ gem install grucrawler
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 
