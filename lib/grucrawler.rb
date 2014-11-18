@@ -56,7 +56,7 @@ class GruCrawler
 
     crawl_more()
 
-    return if response.body.length > @options[:max_page_size] || 1000*1000*1000
+    return if response.body.length > (@options[:max_page_size] || 1000*1000*1000)
 
     nokogiri = Nokogiri::HTML(response.body)
 
