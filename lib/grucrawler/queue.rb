@@ -7,12 +7,13 @@ class GruCrawler
     DOMAIN_VISITS_KEY = 'domain_visits'
     QUEUE_KEY = 'queue'
 
-    def initialize(namespace)
+    def initialize(namespace, visit_once)
       @redis = Redis.new
       @rns = namespace + ':'
       @concurrent_requests = 0
       @tmp_block = {}
       @domains_throttle = Hash.new(0.0)
+      @visit_once = visit_once
     end
 
     def reset
@@ -86,18 +87,21 @@ class GruCrawler
       @redis.srandmember(@rns + QUEUE_KEY)
     end
 
-
-    def visited_already(url)
-      @redis.sismember(@rns + VISITED_ALREADY_KEY, url)
-    end
-
     def push(url)
       @redis.sadd(@rns + QUEUE_KEY, url) == 1
     end
 
+
+    def visited_already(url)
+      return false unless @visit_once
+      @redis.sismember(@rns + VISITED_ALREADY_KEY, url)
+    end
+
     def set_visited_already(url)
+      return unless @visit_once
       @redis.sadd(@rns + VISITED_ALREADY_KEY, url)
     end
+
 
     # TODO: PublicSuffix
     def domain(url)

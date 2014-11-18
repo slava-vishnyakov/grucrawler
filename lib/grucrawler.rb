@@ -12,14 +12,14 @@ class GruCrawler
   def initialize(rules)
     @crawler = rules
     @options = @crawler.options()
-    @queue = GruCrawler::Queue.new(@crawler.class.name)
+    @queue = GruCrawler::Queue.new(@crawler.class.name, @options[:visit_urls_only_once])
 
     @crawler.on_init(self)
   end
 
   def run
     @hydra = Typhoeus::Hydra.new()
-    @concurrency = 5
+    @concurrency = @options[:concurrency] || 5
     crawl_more()
     @hydra.run
   end
@@ -32,7 +32,7 @@ class GruCrawler
     url = @queue.next_url()
     return false unless url
 
-    request = Typhoeus::Request.new(url, followlocation: true, accept_encoding: 'gzip')
+    request = Typhoeus::Request.new(url, followlocation: @options[:follow_redirects], accept_encoding: 'gzip')
     @queue.started(url)
 
     request.on_complete do |response|

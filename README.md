@@ -7,7 +7,8 @@ class ItalianCrawler
   def options
     {
         visit_urls_only_once: true,
-        follow_redirects: true
+        follow_redirects: true,
+        concurrency: 5
     }
   end
 
