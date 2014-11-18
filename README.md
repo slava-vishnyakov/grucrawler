@@ -1,6 +1,6 @@
 # Grucrawler
 
-    require_relative '../lib/grucrawler'
+    require 'grucrawler'
 
     class ItalianCrawler
       def options
