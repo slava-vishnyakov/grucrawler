@@ -10,7 +10,8 @@ class ItalianCrawler
         visit_urls_only_once: true,
         follow_redirects: true,
         concurrency: 5,
-        domain_wait: 20 # seconds between visits to the same domain
+        domain_wait: 20, # seconds between visits to the same domain
+        max_page_size: 1000000
     }
   end
 
