@@ -29,6 +29,8 @@ class ItalianCrawler
   end
 
   def follow_link(target_url, typhoeus_response, nokogiri_html)
+    return false if target_url.match(/\.(jpg|png|js|css)$/)
+
     return true if target_url.include? '.it'
 
     false
