@@ -2,6 +2,7 @@
 
 ```ruby
 require 'grucrawler'
+require 'colorize'
 
 class ItalianCrawler
   def options
