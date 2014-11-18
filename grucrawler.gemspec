@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["bomboze@gmail.com"]
   spec.summary       = %q{Simple crawler using Redis as backend}
   spec.description   = %q{Simple crawler using Redis as backend}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/slava-vishnyakov/grucrawler"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

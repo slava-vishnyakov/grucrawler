@@ -1,5 +1,5 @@
-require_relative "grucrawler/version"
-require_relative "grucrawler/queue"
+require "grucrawler/version"
+require "grucrawler/queue"
 require "typhoeus"
 require "redis"
 require "uri"
