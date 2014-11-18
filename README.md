@@ -16,6 +16,11 @@
 
       def on_page_received(typhoeus_response, nokogiri_html)
         puts "GOT #{typhoeus_response.effective_url.green}"
+
+        # typhoeus_response.body
+        # typhoeus_response.request.url
+        # typhoeus_response.effective_url
+        # nokogiri_html.css('a').each |a| { puts a.text; }
       end
 
       def follow_link(target_url, typhoeus_response, nokogiri_html)
