@@ -113,7 +113,9 @@ class GruCrawler
       return nil if uri.host.nil?
       host = uri.host.downcase
       host = host.start_with?('www.') ? host[4..-1] : host
-      host.match(/\w+\.\w+$/)[0]
+      match = [host.match(/\w+\.\w+$/)]
+      return nil unless match
+      match[0]
     end
   end
 end
