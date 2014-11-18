@@ -45,7 +45,7 @@ class ItalianCrawler
 end
 
 c = GruCrawler.new(ItalianCrawler.new)
-c.reset()
+# c.reset() # deletes all memory of all events - useful for restarting crawl
 c.add_url('http://www.oneworlditaliano.com/english/italian/news-in-italian.htm')
 c.run()
 ```
