@@ -29,7 +29,7 @@ class ItalianCrawler
   end
 
   def follow_link(target_url, typhoeus_response, nokogiri_html)
-    return false if target_url.match(/\.(jpg|png|js|css)$/)
+    return false if target_url.match(/\.(jpg|png|js|css|pdf|exe|dmg|zip|doc|rtf|rar|swf|bmp|swf|mp3|wav|mp4|mpg|flv|wma)$/)
 
     return true if target_url.include? '.it'
 
