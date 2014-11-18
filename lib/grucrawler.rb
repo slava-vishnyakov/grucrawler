@@ -56,7 +56,10 @@ class GruCrawler
 
     crawl_more()
 
-    return if response.body.length > (@options[:max_page_size] || 1000*1000*1000)
+    if response.body.length > (@options[:max_page_size] || 1000*1000*1000)
+      @crawler.debug("URL response size too big: #{response.body.length} from #{response.request.url}")
+      return
+    end
 
     nokogiri = Nokogiri::HTML(response.body)
 
