@@ -12,7 +12,8 @@ class GruCrawler
   def initialize(rules)
     @crawler = rules
     @options = @crawler.options()
-    @queue = GruCrawler::Queue.new(@crawler.class.name, @options[:visit_urls_only_once])
+    domain_wait = @options[:domain_wait] || 20
+    @queue = GruCrawler::Queue.new(@crawler.class.name, @options[:visit_urls_only_once], domain_wait)
 
     @crawler.on_init(self)
   end

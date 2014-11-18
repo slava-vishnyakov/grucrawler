@@ -7,13 +7,14 @@ class GruCrawler
     DOMAIN_VISITS_KEY = 'domain_visits'
     QUEUE_KEY = 'queue'
 
-    def initialize(namespace, visit_once)
+    def initialize(namespace, visit_once, domain_wait)
       @redis = Redis.new
       @rns = namespace + ':'
       @concurrent_requests = 0
       @tmp_block = {}
       @domains_throttle = Hash.new(0.0)
       @visit_once = visit_once
+      @domain_wait = domain_wait
     end
 
     def reset
@@ -41,15 +42,13 @@ class GruCrawler
       url
     end
 
-    MIN_TIME_TO_WAIT = 20
-
     def can_visit_now(url)
       return false if @tmp_block[url]
 
       last_visit = last_visit_to_domain(url)
       time_passed = Time.now.to_f - last_visit
 
-      time_passed > MIN_TIME_TO_WAIT
+      time_passed > @domain_wait
     end
 
     def started(url)

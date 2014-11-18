@@ -9,7 +9,8 @@ class ItalianCrawler
     {
         visit_urls_only_once: true,
         follow_redirects: true,
-        concurrency: 5
+        concurrency: 5,
+        domain_wait: 20 # seconds between visits to the same domain
     }
   end
 
