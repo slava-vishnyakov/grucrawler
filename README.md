@@ -1,51 +1,53 @@
 # Grucrawler
 
-    require 'grucrawler'
+```ruby
+require 'grucrawler'
 
-    class ItalianCrawler
-      def options
-        {
-            visit_urls_only_once: true,
-            follow_redirects: true
-        }
-      end
+class ItalianCrawler
+  def options
+    {
+        visit_urls_only_once: true,
+        follow_redirects: true
+    }
+  end
 
-      def on_init(crawler)
-        @crawler = crawler
-      end
+  def on_init(crawler)
+    @crawler = crawler
+  end
 
-      def on_page_received(typhoeus_response, nokogiri_html)
-        puts "GOT #{typhoeus_response.effective_url.green}"
+  def on_page_received(typhoeus_response, nokogiri_html)
+    puts "GOT #{typhoeus_response.effective_url.green}"
 
-        # typhoeus_response.body
-        # typhoeus_response.request.url
-        # typhoeus_response.effective_url
-        # nokogiri_html.css('a').each |a| { puts a.text; }
-      end
+    # typhoeus_response.body
+    # typhoeus_response.request.url
+    # typhoeus_response.effective_url
+    # nokogiri_html.css('a').each |a| { puts a.text; }
+  end
 
-      def follow_link(target_url, typhoeus_response, nokogiri_html)
-        return true if target_url.include? '.it'
+  def follow_link(target_url, typhoeus_response, nokogiri_html)
+    return true if target_url.include? '.it'
 
-        false
-      end
+    false
+  end
 
-      def debug(message)
-        #puts message.blue
-      end
+  def debug(message)
+    #puts message.blue
+  end
 
-      def log_info(message)
-        puts message.yellow
-      end
+  def log_info(message)
+    puts message.yellow
+  end
 
-      def log_error(typhoeus_response, exception)
-        puts exception.to_s.red
-      end
-    end
+  def log_error(typhoeus_response, exception)
+    puts exception.to_s.red
+  end
+end
 
-    c = GruCrawler.new(ItalianCrawler.new)
-    c.reset()
-    c.add_url('http://www.oneworlditaliano.com/english/italian/news-in-italian.htm')
-    c.run()
+c = GruCrawler.new(ItalianCrawler.new)
+c.reset()
+c.add_url('http://www.oneworlditaliano.com/english/italian/news-in-italian.htm')
+c.run()
+```
 
 
 
