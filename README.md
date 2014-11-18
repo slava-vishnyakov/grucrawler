@@ -46,6 +46,8 @@
 
 ## Installation
 
+[!] Requires local Redis at the moment.
+
 Add this line to your application's Gemfile:
 
     gem 'grucrawler'
